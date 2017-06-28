@@ -1,14 +1,17 @@
 const http = require('http');
 
-const server = http.createServer(function(req, res) {
+function handleRequests(req, res) {
     res.writeHead(200, {'Content-Type': 'application/json'});
     let employee = {
         emp_no: 145,
         first_name: 'Alexandra',
-        last_name: 'Daddario'
+        last_name: 'Daddario',
+        country: 'USA'
     };
 
     res.end(JSON.stringify(employee));
-});
+}
+
+const server = http.createServer(handleRequests);
 
 server.listen(3000);
