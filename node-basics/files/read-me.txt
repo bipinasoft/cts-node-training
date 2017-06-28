@@ -1,2 +1,1 @@
-Node.js learning can be bit ok
-Angular 2 is also ok
+Cloud wars are happening between Amazon, Google and Microsoft

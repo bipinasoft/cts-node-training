@@ -1,2 +1,0 @@
-Node.js learning can be bit ok
-Angular 2 is also ok
