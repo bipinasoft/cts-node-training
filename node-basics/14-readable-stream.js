@@ -8,6 +8,6 @@ let numberOfChunks = 0;
 myReadStream.on('data', function(chunk) {    
     console.log('New Chunk Received : ' + numberOfChunks );
     numberOfChunks++;
-    console.log(chunk.slice(1, 100));
+    console.log(chunk.slice(1,100));
 
 });
