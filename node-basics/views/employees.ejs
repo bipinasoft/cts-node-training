@@ -1,0 +1,15 @@
+<% include partials/nav %>
+<ul>
+    <% for (i=0; i<employees.length; i++) { %>
+        <li>
+            Emp Id: <%= employees[i].id %>
+            <br>
+            Full name : <%= employees[i].first_name %> <%= employees[i].last_name %>
+            <br>
+            City: <%= employees[i].city %>
+            <br>
+            <%= employees[i].hobbies %>
+        </li>
+        <hr>
+    <% } %>
+</ul>
