@@ -1,0 +1,22 @@
+{
+  "name": "cts-node-training",
+  "version": "1.0.0",
+  "description": "The root training folder for CTS",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lps-162/cts-node-training.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lps-162/cts-node-training/issues"
+  },
+  "homepage": "https://github.com/lps-162/cts-node-training#readme",
+  "dependencies": {
+    "express": "^4.15.3"
+  }
+}

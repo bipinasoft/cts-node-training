@@ -2,9 +2,11 @@ const express = require('express');
 
 const employeesRouter = express.Router();
 
-employeesRouter.get('/employees', function(req, res) {
-    res.send('Employees page');
-});
+const employeesController = require('../controllers/employees-controller');
+
+employeesRouter.get('/employees', employeesController.getEmployees);
+employeesRouter.get('/employees/:id', employeesController.getEmployeeById);
+employeesRouter.post('/employees', employeesController.createEmployee);
 
 
 module.exports = employeesRouter;
