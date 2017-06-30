@@ -1,5 +1,7 @@
+const employees = require('../models/employee-model');
+
 function getEmployees (req, res) {
-    res.send('Employees page');
+    res.render('employees/list', { employees: employees });
 }
 
 function getEmployeeById(req, res) {

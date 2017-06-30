@@ -1,6 +1,7 @@
 const express = require('express');
 
 const app = express();
+app.set('view engine', 'ejs');
 
 const PORT_NO = process.env.PORT || 3000;
 
