@@ -1,0 +1,32 @@
+<a href="/employees/create" class="btn btn-sm btn-primary">
+  Create New Employee
+</a>
+<br>
+
+<h4>
+  List of Employees Page
+</h4>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Emp No</th>
+      <th>Full Name </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let employee of employees) { %>
+      <tr>
+        <td><%= employee.emp_no %></td>
+        <td><%= employee.first_name %> <%= employee.last_name %></td>
+        <td>
+          <a href="/employees/<%=employee.id%>" class="btn btn-sm btn-primary">View</a>
+          
+          <a href="/employees/<%=employee.id%>/delete" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
