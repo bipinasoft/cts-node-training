@@ -1,16 +1,16 @@
-const mongoose = require('mongoose');
-const faker = require('faker');
+var mongoose = require('mongoose');
+var faker = require('faker');
 
 mongoose.connect('mongodb://localhost/limetools');
 
-const EmployeeModel = require('./models/employee');
+var EmployeeModel = require('./models/employee');
 
-let count = 0;
+var count = 0;
 
 EmployeeModel.remove({}).then(function() {
     
-    for (i=0; i<10; i++) {
-        let employeeObj = new EmployeeModel();
+    for (var i=0; i<10; i++) {
+        var employeeObj = new EmployeeModel();
         employeeObj.emp_no = faker.random.number();
         employeeObj.first_name = faker.name.firstName();
         employeeObj.last_name = faker.name.lastName();
@@ -26,6 +26,7 @@ EmployeeModel.remove({}).then(function() {
         });
     }
 }).catch(function(err) {
+    console.log(err);
     console.log('Error in setting up data');
     mongoose.disconnect();
 });

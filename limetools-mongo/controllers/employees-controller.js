@@ -21,17 +21,33 @@ function getEmployeeById(req, res) {
         console.log(result);
         res.render('employees/details', { employee: result });
     }).catch(function(err) {
-        console.log('Error ');
+        console.log('Error in fetching employee');
         res.send('Error occured');
     });
 }
 
+function showCreateForm(req, res) {
+    console.log('Show create form');
+    res.render('employees/create');
+}
+
 function createEmployee(req, res) {
-    res.send('Create Employee');
+    console.log('Body : ', req.body);
+    var employee = new EmployeeModel(req.body);
+    employee.save().then(function(result) {
+        res.redirect('/employees/' + result.id);
+    }).catch(function(err) {
+        res.render('employees/create');
+    });
 }
 
 function updateEmployee() {
     res.send('Delete Employee');
+}
+
+function showDeleteConfirmation(req, res) {
+    var employeeId = req.params.id;
+    res.render('employees/delete', { employeeId: employeeId });
 }
 
 function deleteEmployee() {
@@ -42,7 +58,10 @@ module.exports = {
     getEmployees: getEmployees,
     getEmployeeById: getEmployeeById,
 
+    showCreateForm: showCreateForm,
+
     createEmployee: createEmployee,
     updateEmployee: updateEmployee,
-    deleteEmployee: deleteEmployee
+    deleteEmployee: deleteEmployee,
+    showDeleteConfirmation: showDeleteConfirmation
 };
