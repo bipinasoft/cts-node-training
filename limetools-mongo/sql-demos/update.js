@@ -13,7 +13,7 @@ connection.query(
   ["Shivan", 1],
   function (err, result) {
     if (err) throw err;
-
+    
     console.log('Changed ' + result.changedRows + ' rows');
   }
 );
