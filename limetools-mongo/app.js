@@ -4,6 +4,10 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
 var morgan = require('morgan');
 
+var cookieParser = require('cookie-parser');
+var session = require('express-session');
+var flash = require('connect-flash');
+
 var app = express();
 app.set('view engine', 'ejs');
 app.use(expressLayouts);
@@ -21,6 +25,19 @@ app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
 app.use(morgan('dev'));
+
+// setting up flash and session
+app.use(cookieParser());
+app.use(session({
+    secret: 'mycrazysecretwebapp',
+    cookie: {
+        maxAge: 30000
+    },
+    saveUninitialized: false,
+    resave: false
+}));
+app.use(flash());
+
 
 //setting up routes
 require('./routes')(app);

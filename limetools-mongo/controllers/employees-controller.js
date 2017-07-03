@@ -1,4 +1,7 @@
-const EmployeeModel = require('../models/employee');
+var EmployeeModel = require('../models/employee');
+var Joi = require('joi');
+var EmployeeValidationSchema = require('../validations/employee');
+var formatJoiValidationErrors = require('../validations/format');
 
 function getEmployees (req, res) {
 
@@ -17,7 +20,8 @@ function getEmployeeById(req, res) {
 
     EmployeeModel.findById(employeeId).then(function(result) {
         console.log(result);
-        res.render('employees/details', { employee: result });
+        var successMessage = req.flash('creationSuccess');
+        res.render('employees/details', { employee: result , successMessage: successMessage });
     }).catch(function(err) {
         console.log('Error in fetching employee');
         res.send('Error occured');
@@ -26,13 +30,23 @@ function getEmployeeById(req, res) {
 
 function showCreateForm(req, res) {
     console.log('Show create form');
-    res.render('employees/create');
+    var errors = req.flash('creationError');
+    res.render('employees/create', { errors: errors });
 }
 
 function createEmployee(req, res) {
     console.log('Body : ', req.body);
+    
+    var result = Joi.validate(req.body, EmployeeValidationSchema, { abortEarly: false });
+    if (result.error) {
+        var creationErrors = formatJoiValidationErrors(result.error);
+        req.flash('creationError', creationErrors);
+        res.redirect('/employees/create');
+        return;
+    }
     var employee = new EmployeeModel(req.body);
     employee.save().then(function(result) {
+        req.flash('creationSuccess', 'Employee Created Successfully');
         res.redirect('/employees/' + result.id);
     }).catch(function(err) {
         res.render('employees/create');

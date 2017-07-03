@@ -42,6 +42,22 @@
         </nav>
     </header>
 
+    <% if (locals.successMessage !== undefined && locals.successMessage.length > 0 ) { %>
+        <div class="alert alert-success">
+            <%= locals.successMessage %>
+        </div>
+    <% } %>
+
+     <% if (locals.errors !== undefined && locals.errors.length > 0) { %>
+        <div class="alert alert-danger">
+            <% for (let error of errors) { %>
+                <%= error %>
+                <br/>
+            <% } %>
+            
+        </div>
+    <% } %>
+    
     <!--Body portion of the website -->
     <%- body %>
 </body>
