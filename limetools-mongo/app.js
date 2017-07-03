@@ -2,6 +2,7 @@ var express = require('express');
 var expressLayouts = require('express-ejs-layouts');
 var mongoose = require('mongoose');
 var bodyParser = require('body-parser')
+var morgan = require('morgan');
 
 var app = express();
 app.set('view engine', 'ejs');
@@ -14,13 +15,12 @@ mongoose.Promise = global.Promise;
 
 var PORT_NO = process.env.PORT || 3000;
 
-
 //configuring middlewares
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
 // parse application/json
 app.use(bodyParser.json())
-
+app.use(morgan('dev'));
 
 //setting up routes
 require('./routes')(app);

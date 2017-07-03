@@ -12,6 +12,9 @@ employeesRouter.get('/employees', employeesController.getEmployees);
 employeesRouter.get('/employees/:id', employeesController.getEmployeeById);
 employeesRouter.post('/employees', employeesController.createEmployee);
 
+employeesRouter.get('/employees/:id/edit', employeesController.showEditForm);
+employeesRouter.post('/employees/:id/edit', employeesController.updateEmployee);
+
 employeesRouter.get('/employees/:id/delete', employeesController.showDeleteConfirmation);
 employeesRouter.post('/employees/:id/delete', employeesController.deleteEmployee);
 

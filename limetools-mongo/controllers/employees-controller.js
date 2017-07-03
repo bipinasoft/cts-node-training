@@ -1,11 +1,9 @@
 const EmployeeModel = require('../models/employee');
 
 function getEmployees (req, res) {
-    //{ employees: employees }
-    console.log('Control here');
 
+    //Sample to filter : EmployeeModel.find({first_name: 'Angel', last_name: 'Gutmann'})
     EmployeeModel.find({}).then(function(result) {
-        console.log(result);
         res.render('employees/list', { employees: result });
     }).catch(function(err) {
         console.log('Error ');
@@ -41,8 +39,26 @@ function createEmployee(req, res) {
     });
 }
 
-function updateEmployee() {
-    res.send('Delete Employee');
+function showEditForm(req, res) {
+    var employeeId = req.params.id;
+    EmployeeModel.findById(employeeId).then(function(result) {
+        res.render('employees/edit', { employee: result });
+    }).catch(function(err) {
+        res.send('Error in showing editing form');
+    });
+    
+}
+
+function updateEmployee(req, res) {
+    var employeeId = req.params.id;
+    var employeeBody = req.body;
+
+    EmployeeModel.findByIdAndUpdate(employeeId, employeeBody).then(function() {
+        res.redirect('/employees/'+ employeeId);
+    }).catch(function(err) {
+        res.send('Error deleting employee');
+    });
+    
 }
 
 function showDeleteConfirmation(req, res) {
@@ -50,8 +66,14 @@ function showDeleteConfirmation(req, res) {
     res.render('employees/delete', { employeeId: employeeId });
 }
 
-function deleteEmployee() {
-    res.send('Delete Employee');
+function deleteEmployee(req, res) {
+    var employeeId = req.params.id;
+    console.log('Delete Employee');
+    EmployeeModel.findByIdAndRemove(employeeId).then(function() {
+        res.redirect('/employees');
+    }).catch(function(err) {
+        res.send('Could not delete employee');
+    });
 }
 
 module.exports = {
@@ -59,9 +81,11 @@ module.exports = {
     getEmployeeById: getEmployeeById,
 
     showCreateForm: showCreateForm,
-
     createEmployee: createEmployee,
-    updateEmployee: updateEmployee,
+
+    showDeleteConfirmation: showDeleteConfirmation,
     deleteEmployee: deleteEmployee,
-    showDeleteConfirmation: showDeleteConfirmation
+
+    showEditForm: showEditForm,
+    updateEmployee: updateEmployee,
 };
