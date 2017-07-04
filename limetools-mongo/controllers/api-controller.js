@@ -66,11 +66,25 @@ function createEmployee(req, res) {
 }
 
 function updateEmployee(req, res) {
-     res.send('http update ');
+     var employeeId = req.params.id;
+    var employeeBody = req.body;
+
+    EmployeeModel.findByIdAndUpdate(employeeId, employeeBody).then(function(result) {
+        console.log('Result : ', result);
+        res.status(200).json({ data: employeeBody });
+    }).catch(function(err) {
+        res.status(500).json({ message: 'Error in updating employee' });
+    });
 }
 
 function deleteEmployee(req, res) {
-     res.send('http delete');
+    var employeeId = req.params.id;
+    
+    EmployeeModel.findByIdAndRemove(employeeId).then(function() {
+        res.status(204).json({ message: 'Employee deleted successfully' });
+    }).catch(function(err) {
+        res.status(500).json({ message: 'Error in deleting employee' });
+    });
 }
 
 module.exports = {
