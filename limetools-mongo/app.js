@@ -39,6 +39,21 @@ app.use(session({
 app.use(flash());
 
 
+// setting up auth using passport
+const passport = require('./middlewares/passport-auth');
+app.use(passport.initialize());
+app.use(passport.session());
+
+var demoMiddleware = require('./middlewares/demo');
+app.use(demoMiddleware);
+
+// our own middleware
+app.use(function(req, res, next) {
+    res.locals.loggedInUser = req.user;
+    console.log('my own middleware');
+    next();
+});
+
 //setting up routes
 require('./routes')(app);
 

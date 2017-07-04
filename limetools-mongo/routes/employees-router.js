@@ -1,8 +1,11 @@
-const express = require('express');
+var express = require('express');
 
-const employeesRouter = express.Router();
+var employeesRouter = express.Router();
 
-const employeesController = require('../controllers/employees-controller');
+var employeesController = require('../controllers/employees-controller');
+var authController = require('../controllers/auth-controller');
+
+employeesRouter.use('/employees', authController.isLoggedIn);
 
 // create related stuffs
 employeesRouter.get('/employees/create', employeesController.showCreateForm);

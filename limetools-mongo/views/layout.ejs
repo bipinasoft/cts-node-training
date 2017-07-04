@@ -30,14 +30,17 @@
                     <li><a href="/">Home</a></li>                                     
                     <li><a href="/about">About</a></li>
                     <li><a href="/employees">Employees</a></li>
-
                     <li><a href="/peeps">Peeps</a></li>
   
-                    <li>
-                        <a href="/auth/profile">
-                        </a>
-                    </li>
-                    <li><a href="/auth/logout">Logout</a></li>
+                    <% if (locals.loggedInUser !== undefined) { %>
+                         
+                        <li>
+                            <a href="/profile">
+                            Hi, <%= locals.loggedInUser.username %>
+                            </a>
+                        </li>
+                        <li><a href="/logout">Logout</a></li>
+                    <% } %>
                 </ul>
 
             </div>
