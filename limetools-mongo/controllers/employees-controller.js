@@ -12,7 +12,7 @@ function getEmployees (req, res) {
         console.log('Error ');
         res.send('Error occured');
     });
-    
+
 }
 
 function getEmployeeById(req, res) {
@@ -26,6 +26,8 @@ function getEmployeeById(req, res) {
         console.log('Error in fetching employee');
         res.send('Error occured');
     });
+
+
 }
 
 function showCreateForm(req, res) {

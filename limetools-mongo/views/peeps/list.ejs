@@ -1,0 +1,32 @@
+<a href="/employees/create" class="btn btn-sm btn-primary">
+  Create New Peep
+</a>
+<br>
+
+<h4>
+  List of Peeps Page
+</h4>
+
+<table class="table table-bordered table-striped table-hover">
+  <thead>
+    <tr>
+      <th>Emp No</th>
+      <th>Full Name </th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% for (let peep of peeps) { %>
+      <tr>
+        <td><%= peep.emp_no %></td>
+        <td><%= peep.first_name %> <%= peep.last_name %></td>
+        <td>
+          <a href="/peeps/<%=peep.id%>" class="btn btn-sm btn-primary">View</a>
+          
+          <a href="/peeps/<%=peep.id%>/delete" class="btn btn-sm btn-danger">Delete</a>
+        </td>
+      </tr>
+    <% } %>
+  </tbody>
+</table>
+
